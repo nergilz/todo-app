@@ -1,11 +1,13 @@
 package todoapp
 
+// списки
 type TodoList struct {
 	Id          int    `json:"-"`
 	Title       string `json:"title"`
 	Description string `json:"description"`
 }
 
+// записи
 type TodoItem struct {
 	Id          int    `json:"-"`
 	Title       string `json:"title"`
@@ -13,14 +15,14 @@ type TodoItem struct {
 	Done        string `json:"done"`
 }
 
-// таблицы связей списки -> пользователи
+// таблица связей пользователь -> списки
 type UsersList struct {
 	Id     int
 	UserId int
 	ListId int
 }
 
-// таблицы связей списки -> записи
+// таблица связей списки -> записи
 type ItemsList struct {
 	Id     int
 	ItemId int

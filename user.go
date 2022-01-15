@@ -2,7 +2,7 @@ package todoapp
 
 type User struct {
 	Id       int    `json:"-"`
-	Name     string `json:"name"`
-	UserName string `json:"user_name"`
+	Email    string `json:"email"`
 	Password string `json:"password"`
+	UserName string `json:"user_name"`
 }
