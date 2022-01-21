@@ -9,11 +9,11 @@ import (
 )
 
 type Server struct {
-	httpServer *http.Server
+	HttpServer *http.Server
 }
 
 func (s *Server) Run(port string, handler http.Handler) error {
-	s.httpServer = &http.Server{
+	s.HttpServer = &http.Server{
 		Addr:           ":" + port,
 		MaxHeaderBytes: 1048576,
 		ReadTimeout:    10 * time.Second,
@@ -24,9 +24,10 @@ func (s *Server) Run(port string, handler http.Handler) error {
 
 	logrus.Info("Run Server, port:8080")
 
-	return s.httpServer.ListenAndServe()
+	return s.HttpServer.ListenAndServe()
 }
 
 func (s *Server) Shutdown(ctx context.Context) error {
-	return s.httpServer.Shutdown(ctx)
+	logrus.Info("Shutdown Server")
+	return s.HttpServer.Shutdown(ctx)
 }

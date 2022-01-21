@@ -2,15 +2,24 @@ package handler
 
 import (
 	"github.com/gorilla/mux"
+	"github.com/nergilz/todo-app/pkg/service"
 	"github.com/sirupsen/logrus"
 )
 
 type Handler struct {
+	Service *service.Service
+}
+
+func NewHandler(service *service.Service) *Handler {
+	logrus.Info("Init Handler")
+
+	return &Handler{
+		Service: service,
+	}
 }
 
 func (h *Handler) InitHandlers() *mux.Router {
 	muxRouter := mux.NewRouter()
-	logrus.Info("Init Router")
 
 	auth := muxRouter.PathPrefix("/auth").Subrouter()
 	auth.HandleFunc("/sign_in", h.SignIn)
@@ -31,6 +40,8 @@ func (h *Handler) InitHandlers() *mux.Router {
 	items.HandleFunc("/:item_id", h.GetItemById).Methods("GET")
 	items.HandleFunc("/:item_id", h.UpdateItem).Methods("PUT")
 	items.HandleFunc("/:item_id", h.DeleteItem).Methods("DELETE")
+
+	logrus.Info("Init Router")
 
 	return muxRouter
 }
